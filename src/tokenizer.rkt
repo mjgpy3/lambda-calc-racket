@@ -1,6 +1,6 @@
 #lang racket
 
-(define alphabet (string->list "abcdefghijklmnopqrstuvwxyz"))
+(define alphabet (list->set (string->list "abcdefghijklmnopqrstuvwxyz")))
 
 (define (tokenize text)
   (if (= 0 (string-length text))
@@ -12,7 +12,7 @@
 	[(eq? #\) first) (cons 'rparen (tokenize rest))]
 	[(eq? #\\ first) (cons 'lambda (tokenize rest))]
 	[(eq? #\. first) (cons 'dot (tokenize rest))]
-	[(member first alphabet) (cons (list 'name first) (tokenize rest))]
+	[(set-member? alphabet first) (cons (list 'name first) (tokenize rest))]
 	[else (tokenize rest)]))))
 
 (display (tokenize ""))
