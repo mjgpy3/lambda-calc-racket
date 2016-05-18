@@ -5,15 +5,15 @@
 (define (tokenize text)
   (if (= 0 (string-length text))
     '()
-    (let ([first (string-ref text 0)]
-          [rest (substring text 1)])
-      (cond
-	[(eq? #\( first) (cons 'lparen (tokenize rest))]
-	[(eq? #\) first) (cons 'rparen (tokenize rest))]
-	[(eq? #\\ first) (cons 'lambda (tokenize rest))]
-	[(eq? #\. first) (cons 'dot (tokenize rest))]
-	[(set-member? alphabet first) (cons (list 'name first) (tokenize rest))]
-	[else (tokenize rest)]))))
+    (letrec ([first (string-ref text 0)]
+             [rest (substring text 1)])
+      (append (cond
+	[(eq? #\( first) '(lparen)]
+	[(eq? #\) first) '(rparen)]
+	[(eq? #\\ first) '(lambda)]
+	[(eq? #\. first) '(dot)]
+	[(set-member? alphabet first) (list (list 'name first))]
+	[else '()]) (tokenize rest)))))
 
 (display (tokenize ""))
 (newline)
