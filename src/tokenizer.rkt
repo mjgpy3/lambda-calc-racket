@@ -5,7 +5,7 @@
 (define (tokenize text)
   (if (= 0 (string-length text))
     '()
-    (letrec ([first (string-ref text 0)]
+    (let ([first (string-ref text 0)]
              [rest (substring text 1)])
       (append (cond
 	[(eq? #\( first) '(lparen)]
