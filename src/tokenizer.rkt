@@ -1,5 +1,7 @@
 #lang racket
 
+(provide tokenize)
+
 (define alphabet (list->set (string->list "abcdefghijklmnopqrstuvwxyz")))
 
 (define (tokenize text)
@@ -14,17 +16,3 @@
 	[(eq? #\. first) '(dot)]
 	[(set-member? alphabet first) (list (list 'name first))]
 	[else '()]) (tokenize rest)))))
-
-(display (tokenize ""))
-(newline)
-(display (tokenize "("))
-(newline)
-(display (tokenize "()"))
-(newline)
-(display (tokenize "(\\)"))
-(newline)
-(display (tokenize "( \\ .  )"))
-(newline)
-(display (tokenize "( \\ x . x  )"))
-(newline)
-(display (tokenize "( \\ x . xyz  )"))

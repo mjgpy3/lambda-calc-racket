@@ -2,6 +2,8 @@
 
 (require racket/match)
 
+(provide parse)
+
 (define (parse-single tokens)
   (match tokens
     [(list (list 'name name) rest ...)
@@ -18,23 +20,3 @@
 
 (define (parse tokens)
   (car (parse-single tokens)))
-
-(display (parse (list (list 'name 'x))))
-(newline)
-(display (parse (list
-		  'lambda
-		  (list 'name 'x)
-		  'dot
-		  (list 'name 'x))))
-(newline)
-(display (parse (list
-		  'lparen
-		  'lambda
-		  (list 'name 'x)
-		  'dot
-		  (list 'name 'x)
-		  'lambda
-		  (list 'name 'y)
-		  'dot
-		  (list 'name 'y)
-		  'rparen)))

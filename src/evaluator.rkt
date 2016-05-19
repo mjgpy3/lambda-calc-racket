@@ -2,6 +2,8 @@
 
 (require racket/match)
 
+(provide eval)
+
 (define (eval ast)
   (eval-env ast '()))
 
@@ -14,20 +16,3 @@
 				  (eval-env
 				    (caddr closure)
 				    (append (list (list (cadr closure) value)) (cadddr closure) env)))]))
-
-
-
-(define (l arg body)
-  (list 'lambda arg body))
-
-(define (n v)
-  (list 'name v))
-
-(define (a fn arg)
-  (list 'application fn arg))
-
-(display (eval (l 'x (n 'x))))
-(newline)
-(display (eval (a (l 'x (n 'x)) (l 'y (n 'y)))))
-(newline)
-(display (eval (a (a (l 'x (l 'z (n 'x))) (l 'z (n 'z))) (l 'c (n 'c)))))
