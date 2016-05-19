@@ -13,3 +13,4 @@
       (parse
 	(tokenize
 	  (vector-ref (current-command-line-arguments) 0))))))
+(newline)
