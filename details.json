@@ -1,0 +1,5 @@
+{
+  "exe": "racket",
+  "main": "src/lambda-calc.rkt",
+  "specVersion": 0
+}

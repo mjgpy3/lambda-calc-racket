@@ -16,7 +16,7 @@
     [(list 'lparen rest ...)
        (letrec ([r1 (parse-single rest)]
 		[r2 (parse-single (cdr r1))])
-	 (cons (list 'application (car r1) (car r2)) (cdr r2)))]))
+	 (cons (list 'application (car r1) (car r2)) (cddr r2)))]))
 
 (define (parse tokens)
   (car (parse-single tokens)))
